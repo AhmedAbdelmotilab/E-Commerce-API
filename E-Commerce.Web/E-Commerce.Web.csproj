@@ -15,4 +15,9 @@
       <Folder Include="Controllers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\E-Commerce.Persistence\E-Commerce.Persistence.csproj" />
+      <ProjectReference Include="..\E-Commerce.Presentation\E-Commerce.Presentation.csproj" />
+    </ItemGroup>
+
 </Project>
