@@ -1,4 +1,7 @@
+using E_Commerce.Domain.Contracts ;
+using E_Commerce.Persistence.Data.DataSeed ;
 using E_Commerce.Persistence.Data.DbContexts ;
+using E_Commerce.Web.Extensions ;
 using Microsoft.EntityFrameworkCore ;
 
 namespace E_Commerce.Web ;
@@ -18,10 +21,17 @@ public class Program
         {
             options.UseSqlServer ( builder.Configuration.GetConnectionString ( "DefaultConnection" ) ) ;
         } ) ;
+        builder.Services.AddScoped < IDataInitializer , DataInitializer > ( ) ;
 
         #endregion
 
         var app = builder.Build ( ) ; /* Build the app */
+
+        #region Data Seeding
+
+        app.MigrationDatabase ( ).SeedDatabase ( ) ;
+
+        #endregion
 
         #region Configure the HTTP request pipeline. Middleware.
 
