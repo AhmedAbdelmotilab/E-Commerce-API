@@ -1,0 +1,434 @@
+[
+  {
+    "Name": "Classic White T-Shirt",
+    "Description": "A soft cotton white t-shirt that goes with everything. Perfect for casual everyday wear.",
+    "Price": 120,
+    "PictureUrl": "images/products/ClassicWhiteTShirt.jpeg",
+    "TypeId": 1,
+    "BrandId": 1
+  },
+  {
+    "Name": "Premium Cotton Tee",
+    "Description": "Elevated basic tee made from premium Pima cotton. Features reinforced seams and tagless design.",
+    "Price": 180,
+    "PictureUrl": "images/products/ClassicWhiteTShirt.jpeg",
+    "TypeId": 1,
+    "BrandId": 3
+  },
+  {
+    "Name": "Essential White Crew Neck",
+    "Description": "Wardrobe staple with a relaxed fit and breathable fabric. Machine washable and wrinkle-resistant.",
+    "Price": 95,
+    "PictureUrl": "images/products/ClassicWhiteTShirt.jpeg",
+    "TypeId": 1,
+    "BrandId": 5
+  },
+  {
+    "Name": "Organic Cotton Basic Tee",
+    "Description": "Eco-friendly t-shirt made from 100% organic cotton. Soft texture with sustainable production.",
+    "Price": 150,
+    "PictureUrl": "images/products/ClassicWhiteTShirt.jpeg",
+    "TypeId": 1,
+    "BrandId": 6
+  },
+  {
+    "Name": "Slim Fit Jeans",
+    "Description": "These mid-rise slim fit jeans offer a comfortable stretch and a stylish look for all occasions.",
+    "Price": 350,
+    "PictureUrl": "images/products/SlimFitJeans.jpg",
+    "TypeId": 2,
+    "BrandId": 2
+  },
+  {
+    "Name": "Dark Wash Skinny Jeans",
+    "Description": "Trendy skinny jeans with a dark indigo wash. Features five-pocket styling and button fly closure.",
+    "Price": 420,
+    "PictureUrl": "images/products/SlimFitJeans.jpg",
+    "TypeId": 2,
+    "BrandId": 6
+  },
+  {
+    "Name": "Stretch Denim Pants",
+    "Description": "Comfortable stretch denim with a modern slim cut. Perfect balance of style and flexibility.",
+    "Price": 380,
+    "PictureUrl": "images/products/SlimFitJeans.jpg",
+    "TypeId": 2,
+    "BrandId": 1
+  },
+  {
+    "Name": "Classic Blue Jeans",
+    "Description": "Timeless blue jeans with a regular fit. Durable denim that softens with each wear.",
+    "Price": 320,
+    "PictureUrl": "images/products/SlimFitJeans.jpg",
+    "TypeId": 2,
+    "BrandId": 2
+  },
+  {
+    "Name": "Denim Jacket",
+    "Description": "A timeless denim jacket with a slightly faded wash. Layer it over any outfit for an instant upgrade.",
+    "Price": 500,
+    "PictureUrl": "images/products/DenimJacket.jpg",
+    "TypeId": 3,
+    "BrandId": 2
+  },
+  {
+    "Name": "Vintage Wash Jean Jacket",
+    "Description": "Retro-inspired denim jacket with distressed details and brass buttons. Adds edge to any look.",
+    "Price": 550,
+    "PictureUrl": "images/products/DenimJacket.jpg",
+    "TypeId": 3,
+    "BrandId": 6
+  },
+  {
+    "Name": "Oversized Denim Trucker",
+    "Description": "Relaxed fit denim jacket with chest pockets and adjustable waist tabs. Perfect for layering.",
+    "Price": 480,
+    "PictureUrl": "images/products/DenimJacket.jpg",
+    "TypeId": 3,
+    "BrandId": 1
+  },
+  {
+    "Name": "Light Blue Jean Jacket",
+    "Description": "Casual light-wash denim jacket with classic collar. Versatile piece for spring and fall.",
+    "Price": 460,
+    "PictureUrl": "images/products/DenimJacket.jpg",
+    "TypeId": 3,
+    "BrandId": 5
+  },
+  {
+    "Name": "Cotton Hoodie",
+    "Description": "Soft and cozy cotton hoodie with adjustable drawstring and kangaroo pocket. Ideal for cool evenings.",
+    "Price": 400,
+    "PictureUrl": "images/products/CottonHoodie.jpg",
+    "TypeId": 1,
+    "BrandId": 3
+  },
+  {
+    "Name": "Premium Fleece Hoodie",
+    "Description": "Ultra-soft fleece-lined hoodie with ribbed cuffs. Provides warmth without bulk.",
+    "Price": 450,
+    "PictureUrl": "images/products/CottonHoodie.jpg",
+    "TypeId": 1,
+    "BrandId": 1
+  },
+  {
+    "Name": "Athleisure Pullover Hoodie",
+    "Description": "Performance hoodie with moisture-wicking fabric. Perfect for workouts or lounging.",
+    "Price": 520,
+    "PictureUrl": "images/products/CottonHoodie.jpg",
+    "TypeId": 1,
+    "BrandId": 3
+  },
+  {
+    "Name": "Classic Zip-Up Hoodie",
+    "Description": "Full-zip hoodie with side pockets and adjustable hood. Essential layering piece.",
+    "Price": 380,
+    "PictureUrl": "images/products/CottonHoodie.jpg",
+    "TypeId": 1,
+    "BrandId": 4
+  },
+  {
+    "Name": "Formal Blazer",
+    "Description": "Tailored-fit blazer that adds a touch of sophistication to any outfit. Perfect for business or evening wear.",
+    "Price": 850,
+    "PictureUrl": "images/products/FormalBlazer.jpg",
+    "TypeId": 3,
+    "BrandId": 4
+  },
+  {
+    "Name": "Navy Wool Blend Blazer",
+    "Description": "Sophisticated navy blazer with notch lapels and two-button closure. Lined for comfort.",
+    "Price": 920,
+    "PictureUrl": "images/products/FormalBlazer.jpg",
+    "TypeId": 3,
+    "BrandId": 5
+  },
+  {
+    "Name": "Slim Fit Business Jacket",
+    "Description": "Modern slim-cut blazer with stretch fabric for mobility. Ideal for the office or interviews.",
+    "Price": 780,
+    "PictureUrl": "images/products/FormalBlazer.jpg",
+    "TypeId": 3,
+    "BrandId": 2
+  },
+  {
+    "Name": "Charcoal Sport Coat",
+    "Description": "Versatile sport coat with functional buttons and interior pockets. Dress up or down with ease.",
+    "Price": 890,
+    "PictureUrl": "images/products/FormalBlazer.jpg",
+    "TypeId": 3,
+    "BrandId": 6
+  },
+  {
+    "Name": "Summer Floral Dress",
+    "Description": "Flowy floral summer dress with adjustable straps and a flattering waistline. Breathable and comfortable.",
+    "Price": 450,
+    "PictureUrl": "images/products/SummerFloralDress.jpg",
+    "TypeId": 3,
+    "BrandId": 5
+  },
+  {
+    "Name": "Bohemian Maxi Dress",
+    "Description": "Romantic floral print dress with tiered skirt and elastic waist. Perfect for beach vacations.",
+    "Price": 520,
+    "PictureUrl": "images/products/SummerFloralDress.jpg",
+    "TypeId": 3,
+    "BrandId": 5
+  },
+  {
+    "Name": "Garden Party Sundress",
+    "Description": "Feminine sundress with delicate floral pattern and side pockets. Lightweight and airy.",
+    "Price": 380,
+    "PictureUrl": "images/products/SummerFloralDress.jpg",
+    "TypeId": 3,
+    "BrandId": 1
+  },
+  {
+    "Name": "Cottage Core Dress",
+    "Description": "Vintage-inspired floral dress with puff sleeves and smocked bodice. Charming countryside aesthetic.",
+    "Price": 490,
+    "PictureUrl": "images/products/SummerFloralDress.jpg",
+    "TypeId": 3,
+    "BrandId": 2
+  },
+  {
+    "Name": "Men's Leather Jacket",
+    "Description": "Classic brown leather jacket with zip closure and side pockets. Durable and stylish for all seasons.",
+    "Price": 1200,
+    "PictureUrl": "images/products/MensLeatherJacket.jpg",
+    "TypeId": 3,
+    "BrandId": 6
+  },
+  {
+    "Name": "Moto Biker Jacket",
+    "Description": "Edgy leather jacket with asymmetric zip and quilted shoulders. Features gunmetal hardware.",
+    "Price": 1350,
+    "PictureUrl": "images/products/MensLeatherJacket.jpg",
+    "TypeId": 3,
+    "BrandId": 6
+  },
+  {
+    "Name": "Vintage Leather Bomber",
+    "Description": "Distressed leather bomber jacket with ribbed collar and cuffs. Timeless aviation style.",
+    "Price": 1150,
+    "PictureUrl": "images/products/MensLeatherJacket.jpg",
+    "TypeId": 3,
+    "BrandId": 4
+  },
+  {
+    "Name": "Premium Cowhide Jacket",
+    "Description": "Top-grain cowhide leather jacket with interior pockets. Investment piece that ages beautifully.",
+    "Price": 1450,
+    "PictureUrl": "images/products/MensLeatherJacket.jpg",
+    "TypeId": 3,
+    "BrandId": 2
+  },
+  {
+    "Name": "Casual Sneakers",
+    "Description": "Lightweight sneakers designed for everyday wear. Breathable material with cushioned soles.",
+    "Price": 600,
+    "PictureUrl": "images/products/CasualSneakers.jpg",
+    "TypeId": 4,
+    "BrandId": 3
+  },
+  {
+    "Name": "Performance Running Shoes",
+    "Description": "Athletic sneakers with responsive cushioning and breathable mesh upper. Ideal for active lifestyles.",
+    "Price": 750,
+    "PictureUrl": "images/products/CasualSneakers.jpg",
+    "TypeId": 4,
+    "BrandId": 3
+  },
+  {
+    "Name": "Classic Canvas Sneakers",
+    "Description": "Timeless low-top sneakers with vulcanized rubber sole. Comfortable and versatile.",
+    "Price": 450,
+    "PictureUrl": "images/products/CasualSneakers.jpg",
+    "TypeId": 4,
+    "BrandId": 1
+  },
+  {
+    "Name": "Retro Court Shoes",
+    "Description": "Vintage-inspired court sneakers with leather accents. Clean design with premium materials.",
+    "Price": 680,
+    "PictureUrl": "images/products/CasualSneakers.jpg",
+    "TypeId": 4,
+    "BrandId": 2
+  },
+  {
+    "Name": "Classic Black Dress Pants",
+    "Description": "Slim-cut black dress pants that offer a polished look for formal or office wear.",
+    "Price": 400,
+    "PictureUrl": "images/products/ClassicBlackDressPants.jpg",
+    "TypeId": 2,
+    "BrandId": 1
+  },
+  {
+    "Name": "Tailored Wool Trousers",
+    "Description": "Premium wool blend trousers with crisp crease and flat front. Perfect for business meetings.",
+    "Price": 480,
+    "PictureUrl": "images/products/ClassicBlackDressPants.jpg",
+    "TypeId": 2,
+    "BrandId": 4
+  },
+  {
+    "Name": "Stretch Office Pants",
+    "Description": "Comfortable stretch dress pants with modern slim fit. Wrinkle-resistant fabric for busy professionals.",
+    "Price": 360,
+    "PictureUrl": "images/products/ClassicBlackDressPants.jpg",
+    "TypeId": 2,
+    "BrandId": 5
+  },
+  {
+    "Name": "Executive Dress Slacks",
+    "Description": "High-quality dress pants with precise tailoring and belt loops. Sophisticated and professional.",
+    "Price": 520,
+    "PictureUrl": "images/products/ClassicBlackDressPants.jpg",
+    "TypeId": 2,
+    "BrandId": 2
+  },
+  {
+    "Name": "Knitted Sweater",
+    "Description": "Warm knitted sweater with a crew neckline and ribbed cuffs. Ideal for layering in winter.",
+    "Price": 380,
+    "PictureUrl": "images/products/KnittedSweater.jpg",
+    "TypeId": 1,
+    "BrandId": 2
+  },
+  {
+    "Name": "Cable Knit Pullover",
+    "Description": "Classic cable knit sweater in soft merino wool. Features textured pattern and relaxed fit.",
+    "Price": 450,
+    "PictureUrl": "images/products/KnittedSweater.jpg",
+    "TypeId": 1,
+    "BrandId": 5
+  },
+  {
+    "Name": "Cashmere Blend Sweater",
+    "Description": "Luxurious cashmere blend with V-neck design. Incredibly soft and warm without heaviness.",
+    "Price": 580,
+    "PictureUrl": "images/products/KnittedSweater.jpg",
+    "TypeId": 1,
+    "BrandId": 6
+  },
+  {
+    "Name": "Chunky Knit Cardigan",
+    "Description": "Oversized cardigan with button closure and patch pockets. Cozy layering piece for fall.",
+    "Price": 420,
+    "PictureUrl": "images/products/KnittedSweater.jpg",
+    "TypeId": 1,
+    "BrandId": 1
+  },
+  {
+    "Name": "Men's Polo Shirt",
+    "Description": "Classic short-sleeve polo shirt with a soft feel and neat collar. Perfect for casual Fridays.",
+    "Price": 200,
+    "PictureUrl": "images/products/MensPoloShirt.jpg",
+    "TypeId": 1,
+    "BrandId": 4
+  },
+  {
+    "Name": "Performance Polo",
+    "Description": "Moisture-wicking polo with UV protection. Ideal for golf or outdoor activities.",
+    "Price": 280,
+    "PictureUrl": "images/products/MensPoloShirt.jpg",
+    "TypeId": 1,
+    "BrandId": 3
+  },
+  {
+    "Name": "Slim Fit Pique Polo",
+    "Description": "Modern slim-fit polo in breathable pique cotton. Three-button placket and side vents.",
+    "Price": 240,
+    "PictureUrl": "images/products/MensPoloShirt.jpg",
+    "TypeId": 1,
+    "BrandId": 2
+  },
+  {
+    "Name": "Premium Cotton Polo",
+    "Description": "Long-staple cotton polo with refined details. Sophisticated casual wear for any occasion.",
+    "Price": 320,
+    "PictureUrl": "images/products/MensPoloShirt.jpg",
+    "TypeId": 1,
+    "BrandId": 6
+  },
+  {
+    "Name": "Women's Trench Coat",
+    "Description": "Chic beige trench coat with adjustable belt and water-resistant fabric. A wardrobe essential.",
+    "Price": 950,
+    "PictureUrl": "images/products/WomensTrenchCoat.jpeg",
+    "TypeId": 3,
+    "BrandId": 5
+  },
+  {
+    "Name": "Classic Double-Breasted Trench",
+    "Description": "Timeless trench coat with storm flap and epaulettes. Features removable liner for versatility.",
+    "Price": 1100,
+    "PictureUrl": "images/products/WomensTrenchCoat.jpeg",
+    "TypeId": 3,
+    "BrandId": 4
+  },
+  {
+    "Name": "Modern Lightweight Trench",
+    "Description": "Contemporary trench with minimalist design. Water-repellent fabric perfect for spring showers.",
+    "Price": 820,
+    "PictureUrl": "images/products/WomensTrenchCoat.jpeg",
+    "TypeId": 3,
+    "BrandId": 1
+  },
+  {
+    "Name": "Belted Mac Coat",
+    "Description": "Elegant trench-style mac with waist-defining belt. Sophisticated outerwear for any season.",
+    "Price": 890,
+    "PictureUrl": "images/products/WomensTrenchCoat.jpeg",
+    "TypeId": 3,
+    "BrandId": 2
+  },
+  {
+    "Name": "Wool Scarf",
+    "Description": "Soft wool scarf that keeps you warm while adding a stylish touch to your winter outfits.",
+    "Price": 150,
+    "PictureUrl": "images/products/WoolScarf.jpg",
+    "TypeId": 4,
+    "BrandId": 2
+  },
+  {
+    "Name": "Cashmere Wrap Scarf",
+    "Description": "Luxurious cashmere scarf with fringe detail. Ultra-soft and warm for cold weather.",
+    "Price": 280,
+    "PictureUrl": "images/products/WoolScarf.jpg",
+    "TypeId": 4,
+    "BrandId": 6
+  },
+  {
+    "Name": "Plaid Wool Scarf",
+    "Description": "Classic plaid pattern in soft merino wool. Timeless accessory for fall and winter.",
+    "Price": 180,
+    "PictureUrl": "images/products/WoolScarf.jpg",
+    "TypeId": 4,
+    "BrandId": 5
+  },
+  {
+    "Name": "Oversized Blanket Scarf",
+    "Description": "Extra-large wool scarf that can be worn multiple ways. Cozy and stylish winter essential.",
+    "Price": 220,
+    "PictureUrl": "images/products/WoolScarf.jpg",
+    "TypeId": 4,
+    "BrandId": 1
+  },
+  {
+    "Name": "Ribbed Knit Scarf",
+    "Description": "Textured ribbed knit in soft wool blend. Simple and versatile cold-weather accessory.",
+    "Price": 140,
+    "PictureUrl": "images/products/WoolScarf.jpg",
+    "TypeId": 4,
+    "BrandId": 4
+  },
+  {
+    "Name": "Infinity Loop Scarf",
+    "Description": "Convertible wool scarf with infinity loop design. Easy to wear and endlessly stylish.",
+    "Price": 160,
+    "PictureUrl": "images/products/WoolScarf.jpg",
+    "TypeId": 4,
+    "BrandId": 3
+  }
+]
