@@ -1,3 +1,6 @@
+using E_Commerce.Persistence.Data.DbContexts ;
+using Microsoft.EntityFrameworkCore ;
+
 namespace E_Commerce.Web ;
 
 public class Program
@@ -11,6 +14,10 @@ public class Program
         builder.Services.AddControllers ( ) ; /* API Controllers */
         builder.Services.AddEndpointsApiExplorer ( ) ; /* Swagger */
         builder.Services.AddSwaggerGen ( ) ; /* Swagger */
+        builder.Services.AddDbContext < StoreDbContext > ( options =>
+        {
+            options.UseSqlServer ( builder.Configuration.GetConnectionString ( "DefaultConnection" ) ) ;
+        } ) ;
 
         #endregion
 
