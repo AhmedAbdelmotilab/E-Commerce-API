@@ -8,7 +8,7 @@ namespace E_Commerce.Web ;
 
 public class Program
 {
-    public static void Main ( string [ ] args )
+    public static async Task Main ( string [ ] args )
     {
         var builder = WebApplication.CreateBuilder ( args ) ; /* Create the builder */
 
@@ -29,7 +29,8 @@ public class Program
 
         #region Data Seeding
 
-        app.MigrationDatabase ( ).SeedDatabase ( ) ;
+        await app.MigrationDatabaseAsync ( ) ;
+        await app.SeedDatabaseAsync ( ) ;
 
         #endregion
 
@@ -48,6 +49,6 @@ public class Program
 
         #endregion
 
-        app.Run ( ) ; /* Run the app */
+        await app.RunAsync ( ) ; /* Run the app */
     }
 }

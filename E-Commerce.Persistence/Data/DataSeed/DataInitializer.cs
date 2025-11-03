@@ -16,15 +16,15 @@ public class DataInitializer : IDataInitializer
         _dbContext = dbContext ;
     }
 
-    public void Initialize ( )
+    public async Task InitializeAsync ( )
     {
         try
         {
             #region Check On That We Have Products and Brand and Types If Yes Go Out
 
-            var HasProducts = _dbContext.Products.Any ( ) ;
-            var HasProductBrands = _dbContext.ProductBrands.Any ( ) ;
-            var HasProductTypes = _dbContext.ProductTypes.Any ( ) ;
+            var HasProducts = await _dbContext.Products.AnyAsync ( ) ;
+            var HasProductBrands = await _dbContext.ProductBrands.AnyAsync ( ) ;
+            var HasProductTypes = await _dbContext.ProductTypes.AnyAsync ( ) ;
             if ( HasProducts && HasProductBrands && HasProductTypes ) return ;
 
             #endregion
@@ -33,7 +33,7 @@ public class DataInitializer : IDataInitializer
 
             if ( ! HasProductBrands )
             {
-                SeedDataFromJson < ProductBrand , int > ( "brands.json" , _dbContext.ProductBrands ) ;
+                await SeedDataFromJsonAsync < ProductBrand , int > ( "brands.json" , _dbContext.ProductBrands ) ;
             }
 
             #endregion
@@ -42,8 +42,8 @@ public class DataInitializer : IDataInitializer
 
             if ( ! HasProductTypes )
             {
-                SeedDataFromJson < ProductType , int > ( "types.json" , _dbContext.ProductTypes ) ;
-                _dbContext.SaveChanges ( ) ;
+                await SeedDataFromJsonAsync < ProductType , int > ( "types.json" , _dbContext.ProductTypes ) ;
+                await _dbContext.SaveChangesAsync ( ) ;
             }
 
             #endregion
@@ -52,8 +52,8 @@ public class DataInitializer : IDataInitializer
 
             if ( ! HasProducts )
             {
-                SeedDataFromJson < Product , int > ( "products.json" , _dbContext.Products ) ;
-                _dbContext.SaveChanges ( ) ;
+                await SeedDataFromJsonAsync < Product , int > ( "products.json" , _dbContext.Products ) ;
+                await _dbContext.SaveChangesAsync ( ) ;
             }
 
             #endregion
@@ -66,21 +66,22 @@ public class DataInitializer : IDataInitializer
 
     #region Seed Data From JSON File To The Three Tables
 
-    private void SeedDataFromJson < T , TKey > ( string fileName , DbSet < T > dbSet ) where T : BaseEntity < TKey >
+    private async Task SeedDataFromJsonAsync < T , TKey > ( string fileName , DbSet < T > dbSet )
+        where T : BaseEntity < TKey >
     {
         var FilePath = @"..\E-Commerce.Persistence\Data\DataSeed\Files\" + fileName ;
         if ( ! File.Exists ( FilePath ) ) throw new FileNotFoundException ( $"File : {fileName} Not Found" ) ;
         try
         {
             using var DataStream = File.OpenRead ( FilePath ) ;
-            var Data = JsonSerializer.Deserialize < List < T > > ( DataStream ,
+            var Data = await JsonSerializer.DeserializeAsync < List < T > > ( DataStream ,
                 new JsonSerializerOptions ( )
                 {
                     PropertyNameCaseInsensitive = true
                 } ) ;
             if ( Data is not null )
             {
-                dbSet.AddRange ( Data ) ;
+                await dbSet.AddRangeAsync ( Data ) ;
             }
         }
         catch ( Exception e )
