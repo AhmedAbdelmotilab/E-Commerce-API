@@ -14,5 +14,5 @@ public interface IProductService
     Task < IEnumerable < BrandDto > > GetAllBrandsAsync ( ) ;
 
     // 4. Get All Products Types
-    Task < IEnumerable < TypeDto > > GetAllBrandByIdAsync ( ) ;
+    Task < IEnumerable < TypeDto > > GetAllTypesAsync ( ) ;
 }

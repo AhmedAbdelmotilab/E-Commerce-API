@@ -35,7 +35,7 @@ public class ProductService : IProductService
         return _mapper.Map < IEnumerable < BrandDto > > ( Brands ) ;
     }
 
-    public async Task < IEnumerable < TypeDto > > GetAllBrandByIdAsync ( )
+    public async Task < IEnumerable < TypeDto > > GetAllTypesAsync ( )
     {
         var Types = await _unitOfWork.GetRepository < ProductType , int > ( ).GetAllAsync ( ) ;
         return _mapper.Map < IEnumerable < TypeDto > > ( Types ) ;
