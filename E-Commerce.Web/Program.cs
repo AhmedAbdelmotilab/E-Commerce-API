@@ -3,7 +3,9 @@ using E_Commerce.Domain.Contracts ;
 using E_Commerce.Persistence.Data.DataSeed ;
 using E_Commerce.Persistence.Data.DbContexts ;
 using E_Commerce.Persistence.Repositories ;
+using E_Commerce.Services_Abstraction ;
 using E_Commerce.Services.MappingProfile ;
+using E_Commerce.Services.Services ;
 using E_Commerce.Web.Extensions ;
 using Microsoft.EntityFrameworkCore ;
 
@@ -28,6 +30,7 @@ public class Program
         builder.Services.AddScoped < IUnitOfWork , UnitOfWork > ( ) ;
         builder.Services.AddScoped < IMapper , Mapper > ( ) ;
         builder.Services.AddAutoMapper ( X => X.AddProfile < ProductProfile > ( ) ) ;
+        builder.Services.AddScoped < IProductService , ProductService > ( ) ;
 
         #endregion
 
