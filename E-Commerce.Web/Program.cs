@@ -27,8 +27,20 @@ public class Program
         } ) ;
         builder.Services.AddScoped < IDataInitializer , DataInitializer > ( ) ;
         builder.Services.AddScoped < IUnitOfWork , UnitOfWork > ( ) ;
-        builder.Services.AddAutoMapper ( X => X.AddProfile < ProductProfile > ( ) ) ;
-        builder.Services.AddTransient < ProductPictureUrlResolver > ( ) ;
+
+        #region With AutoMapper 15.0.0
+
+        // builder.Services.AddAutoMapper ( X => X.AddProfile < ProductProfile > ( ) ) ;
+        // builder.Services.AddTransient < ProductPictureUrlResolver > ( ) ;
+
+        #endregion
+
+        #region With AutoMapper 14.0.0
+
+        builder.Services.AddAutoMapper ( typeof ( ProductProfile ).Assembly ) ;
+
+        #endregion
+
         builder.Services.AddScoped < IProductService , ProductService > ( ) ;
 
         #endregion
