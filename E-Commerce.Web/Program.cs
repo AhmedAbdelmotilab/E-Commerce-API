@@ -63,6 +63,7 @@ public class Program
             app.UseSwaggerUI ( ) ; /* Swagger UI */
         }
 
+        app.UseStaticFiles ( ) ;
         app.UseHttpsRedirection ( ) ; /* HTTPS Redirection */
 
         app.MapControllers ( ) ; /* Map API Controllers */
