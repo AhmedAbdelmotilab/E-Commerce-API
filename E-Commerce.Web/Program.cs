@@ -1,4 +1,3 @@
-using AutoMapper ;
 using E_Commerce.Domain.Contracts ;
 using E_Commerce.Persistence.Data.DataSeed ;
 using E_Commerce.Persistence.Data.DbContexts ;
@@ -28,7 +27,6 @@ public class Program
         } ) ;
         builder.Services.AddScoped < IDataInitializer , DataInitializer > ( ) ;
         builder.Services.AddScoped < IUnitOfWork , UnitOfWork > ( ) ;
-        builder.Services.AddScoped < IMapper , Mapper > ( ) ;
         builder.Services.AddAutoMapper ( X => X.AddProfile < ProductProfile > ( ) ) ;
         builder.Services.AddScoped < IProductService , ProductService > ( ) ;
 
