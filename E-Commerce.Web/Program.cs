@@ -28,6 +28,7 @@ public class Program
         builder.Services.AddScoped < IDataInitializer , DataInitializer > ( ) ;
         builder.Services.AddScoped < IUnitOfWork , UnitOfWork > ( ) ;
         builder.Services.AddAutoMapper ( X => X.AddProfile < ProductProfile > ( ) ) ;
+        builder.Services.AddTransient < ProductPictureUrlResolver > ( ) ;
         builder.Services.AddScoped < IProductService , ProductService > ( ) ;
 
         #endregion

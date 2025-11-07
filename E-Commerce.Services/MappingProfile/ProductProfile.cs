@@ -11,9 +11,12 @@ public class ProductProfile : Profile
         #region Product Mapping
 
         // 1. Map The Entity + Mapping The Navigational Proprieties Of Product Brand And Type
+        // 2. We Use The Resolver OverLoad For Getting The Image URL
+        //  Is Like This => {{BaseURL}}/api/Products/images/products/ClassicWhiteTShirt.jpeg
         CreateMap < Product , ProductDto > ( )
             .ForMember ( dest => dest.ProductType , opt => opt.MapFrom ( src => src.ProductType.Name ) )
-            .ForMember ( dest => dest.ProductBrand , opt => opt.MapFrom ( src => src.ProductBrand.Name ) ) ;
+            .ForMember ( dest => dest.ProductBrand , opt => opt.MapFrom ( src => src.ProductBrand.Name ) )
+            .ForMember ( des => des.PictureUrl , opt => opt.MapFrom < ProductPictureUrlResolver > ( ) ) ;
 
         #endregion
 
