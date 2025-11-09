@@ -19,9 +19,9 @@ public class ProductsController : ControllerBase
 
     [ HttpGet ]
     // GET : => BaseUrl/api/Products
-    public async Task < ActionResult < IEnumerable < ProductDto > > > GetAllProducts ( )
+    public async Task < ActionResult < IEnumerable < ProductDto > > > GetAllProducts ( int ? brandId , int ? typeId )
     {
-        var Products = await _productService.GetProductsAsync ( ) ;
+        var Products = await _productService.GetProductsAsync ( brandId , typeId ) ;
         return Ok ( Products ) ;
     }
 

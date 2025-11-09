@@ -4,7 +4,8 @@ namespace E_Commerce.Services.Specifications ;
 
 public class ProductWithTypeAndBrandSpecification : BaseSpecification < Product , int >
 {
-    public ProductWithTypeAndBrandSpecification ( ) : base ( null )
+    public ProductWithTypeAndBrandSpecification ( int ? brandId , int ? typeId )
+        : base ( P => ( ! brandId.HasValue || P.BrandId == brandId.Value ) && ( ! typeId.HasValue || P.TypeId == typeId.Value ) )
     {
         AddInclude ( P => P.ProductType ) ;
         AddInclude ( P => P.ProductBrand ) ;

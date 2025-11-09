@@ -18,16 +18,16 @@ public class ProductService : IProductService
         _mapper = mapper ;
     }
 
-    public async Task < IEnumerable < ProductDto > > GetProductsAsync ( )
+    public async Task < IEnumerable < ProductDto > > GetProductsAsync ( int ? brandId , int ? typeId )
     {
-        var Specification = new ProductWithTypeAndBrandSpecification ( ) ;
+        var Specification = new ProductWithTypeAndBrandSpecification ( brandId , typeId ) ;
         var Products = await _unitOfWork.GetRepository < Product , int > ( ).GetAllAsync ( Specification ) ;
         return _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
     }
 
     public async Task < ProductDto > GetProductByIdAsync ( int id )
     {
-        var Specification = new ProductWithTypeAndBrandSpecification ( id) ;
+        var Specification = new ProductWithTypeAndBrandSpecification ( id ) ;
         var Product = await _unitOfWork.GetRepository < Product , int > ( ).GetByIdAsync ( Specification ) ;
         return _mapper.Map < ProductDto > ( Product ) ;
     }
