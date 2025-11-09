@@ -2,6 +2,7 @@
 using E_Commerce.Domain.Contracts ;
 using E_Commerce.Domain.Entities.ProductModule ;
 using E_Commerce.Services_Abstraction ;
+using E_Commerce.Services.Specifications ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
 
 namespace E_Commerce.Services.Services ;
@@ -19,13 +20,15 @@ public class ProductService : IProductService
 
     public async Task < IEnumerable < ProductDto > > GetProductsAsync ( )
     {
-        var Products = await _unitOfWork.GetRepository < Product , int > ( ).GetAllAsync ( ) ;
+        var Specification = new ProductWithTypeAndBrandSpecification ( ) ;
+        var Products = await _unitOfWork.GetRepository < Product , int > ( ).GetAllAsync ( Specification ) ;
         return _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
     }
 
     public async Task < ProductDto > GetProductByIdAsync ( int id )
     {
-        var Product = await _unitOfWork.GetRepository < Product , int > ( ).GetByIdAsync ( id ) ;
+        var Specification = new ProductWithTypeAndBrandSpecification ( id) ;
+        var Product = await _unitOfWork.GetRepository < Product , int > ( ).GetByIdAsync ( Specification ) ;
         return _mapper.Map < ProductDto > ( Product ) ;
     }
 
