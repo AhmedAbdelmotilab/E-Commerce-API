@@ -4,6 +4,7 @@ using E_Commerce.Domain.Entities.ProductModule ;
 using E_Commerce.Services_Abstraction ;
 using E_Commerce.Services.Specifications ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
+using E_Commerce.Shared.Params ;
 
 namespace E_Commerce.Services.Services ;
 
@@ -18,9 +19,10 @@ public class ProductService : IProductService
         _mapper = mapper ;
     }
 
-    public async Task < IEnumerable < ProductDto > > GetProductsAsync ( int ? brandId , int ? typeId )
+    public async Task < IEnumerable < ProductDto > > GetProductsAsync ( ProductQueryParams queryParams )
     {
-        var Specification = new ProductWithTypeAndBrandSpecification ( brandId , typeId ) ;
+        var Specification =
+            new ProductWithTypeAndBrandSpecification ( queryParams ) ;
         var Products = await _unitOfWork.GetRepository < Product , int > ( ).GetAllAsync ( Specification ) ;
         return _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
     }
