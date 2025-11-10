@@ -26,4 +26,19 @@ public abstract class BaseSpecification < TEntity , TKey > : ISpecifications < T
         => OrderByDescending = orderByDescendingExpression ;
 
     #endregion
+
+    #region Pagination
+
+    public int Take { get ; private set ; }
+    public int Skip { get ; private set ; }
+    public bool IsPaginated { get ; private set ; }
+
+    protected void ApplyPagination ( int pageSize , int pageIndex )
+    {
+        IsPaginated = true ;
+        Take = pageSize ;
+        Skip = ( pageIndex - 1 ) * pageSize ;
+    }
+
+    #endregion
 }

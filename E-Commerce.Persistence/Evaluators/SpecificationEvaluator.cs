@@ -33,6 +33,11 @@ internal static class SpecificationEvaluator
             {
                 Query = Query.OrderByDescending ( specifications.OrderByDescending ) ;
             }
+
+            if ( specifications.IsPaginated == true )
+            {
+                Query = Query.Skip ( specifications.Skip ).Take ( specifications.Take ) ;
+            }
         }
 
         return Query ;

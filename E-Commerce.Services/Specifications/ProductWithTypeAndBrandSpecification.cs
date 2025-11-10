@@ -32,6 +32,8 @@ public class ProductWithTypeAndBrandSpecification : BaseSpecification < Product 
                 AddOrderBy ( X => X.Id ) ;
                 break ;
         }
+
+        ApplyPagination ( queryParams.PageSize , queryParams.PageIndex ) ;
     }
 
     public ProductWithTypeAndBrandSpecification ( int id ) : base ( P => P.Id == id )
