@@ -11,4 +11,5 @@ public interface IGenericRepository < TEntity , TKey > where TEntity : BaseEntit
     Task AddAsync ( TEntity entity ) ;
     void Remove ( TEntity entity ) ;
     void Update ( TEntity entity ) ;
+    Task < int > CountAsync ( ISpecifications < TEntity , TKey > specifications ) ;
 }

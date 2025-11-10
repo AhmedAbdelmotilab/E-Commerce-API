@@ -31,4 +31,9 @@ public class GenericRepository < TEntity , TKey > : IGenericRepository < TEntity
     public void Remove ( TEntity entity ) => _dbContext.Set < TEntity > ( ).Remove ( entity ) ;
 
     public void Update ( TEntity entity ) => _dbContext.Set < TEntity > ( ).Update ( entity ) ;
+
+    public Task < int > CountAsync ( ISpecifications < TEntity , TKey > specifications )
+    {
+        return SpecificationEvaluator.CreateQuery ( _dbContext.Set < TEntity > ( ) , specifications ).CountAsync ( ) ;
+    }
 }

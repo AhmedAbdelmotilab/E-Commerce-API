@@ -26,10 +26,12 @@ public class ProductService : IProductService
         var Products = await _unitOfWork.GetRepository < Product , int > ( ).GetAllAsync ( Specification ) ;
         var CountDataToReturn = Products.Count ( ) ;
         var DataToReturn = _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
+        var SpecificationForCount = new ProductCountSpecification ( queryParams ) ;
+        var CountOfAllProducts = await _unitOfWork.GetRepository < Product , int > ( ).CountAsync ( SpecificationForCount ) ;
         return new PaginationResult < ProductDto > (
             queryParams.PageIndex ,
             CountDataToReturn ,
-            0 ,
+            CountOfAllProducts ,
             DataToReturn
         ) ;
     }
