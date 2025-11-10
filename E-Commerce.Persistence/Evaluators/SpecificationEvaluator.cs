@@ -11,15 +11,18 @@ internal static class SpecificationEvaluator
         ISpecifications < TEntity , TKey > ? specifications ) where TEntity : BaseEntity < TKey >
     {
         var Query = entryPoint ;
-        if ( specifications is not null && specifications.IncludeExpression.Any ( ) )
+        if ( specifications is not null )
         {
-            if ( specifications.IncludeExpression.Any ( ) )
+            if ( specifications.Criteria is not null )
             {
                 Query = Query.Where ( specifications.Criteria ) ;
             }
 
-            Query = specifications.IncludeExpression.Aggregate ( Query ,
-                ( currentQuery , includeExp ) => currentQuery.Include ( includeExp ) ) ;
+            if ( specifications.IncludeExpression is not null && specifications.IncludeExpression.Any ( ) )
+            {
+                Query = specifications.IncludeExpression.Aggregate ( Query ,
+                    ( currentQuery , includeExp ) => currentQuery.Include ( includeExp ) ) ;
+            }
         }
 
         return Query ;
