@@ -22,12 +22,13 @@ public class ProductService : IProductService
 
     public async Task < PaginationResult < ProductDto > > GetProductsAsync ( ProductQueryParams queryParams )
     {
+        var Repo = _unitOfWork.GetRepository < Product , int > ( ) ;
         var Specification = new ProductWithTypeAndBrandSpecification ( queryParams ) ;
-        var Products = await _unitOfWork.GetRepository < Product , int > ( ).GetAllAsync ( Specification ) ;
+        var Products = await Repo.GetAllAsync ( Specification ) ;
         var CountDataToReturn = Products.Count ( ) ;
         var DataToReturn = _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
         var SpecificationForCount = new ProductCountSpecification ( queryParams ) ;
-        var CountOfAllProducts = await _unitOfWork.GetRepository < Product , int > ( ).CountAsync ( SpecificationForCount ) ;
+        var CountOfAllProducts = await Repo.CountAsync ( SpecificationForCount ) ;
         return new PaginationResult < ProductDto > (
             queryParams.PageIndex ,
             CountDataToReturn ,

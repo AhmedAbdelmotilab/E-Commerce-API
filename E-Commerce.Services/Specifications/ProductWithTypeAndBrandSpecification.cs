@@ -7,10 +7,7 @@ namespace E_Commerce.Services.Specifications ;
 public class ProductWithTypeAndBrandSpecification : BaseSpecification < Product , int >
 {
     public ProductWithTypeAndBrandSpecification ( ProductQueryParams queryParams )
-        : base ( P => ( ! queryParams.BrandId.HasValue || P.BrandId == queryParams.BrandId.Value )
-                      && ( ! queryParams.TypeId.HasValue || P.TypeId == queryParams.TypeId.Value )
-                      && ( string.IsNullOrEmpty ( queryParams.Search ) ||
-                           P.Name.ToLower ( ).Contains ( queryParams.Search.ToLower ( ) ) ) )
+        : base ( ProductSpecificationHelper.GetProductCriteria ( queryParams ) )
     {
         AddInclude ( P => P.ProductType ) ;
         AddInclude ( P => P.ProductBrand ) ;
