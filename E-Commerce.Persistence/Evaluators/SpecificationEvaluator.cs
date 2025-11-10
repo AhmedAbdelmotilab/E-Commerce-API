@@ -23,6 +23,16 @@ internal static class SpecificationEvaluator
                 Query = specifications.IncludeExpression.Aggregate ( Query ,
                     ( currentQuery , includeExp ) => currentQuery.Include ( includeExp ) ) ;
             }
+
+            if ( specifications.OrderBy is not null )
+            {
+                Query = Query.OrderBy ( specifications.OrderBy ) ;
+            }
+
+            if ( specifications.OrderByDescending is not null )
+            {
+                Query = Query.OrderByDescending ( specifications.OrderByDescending ) ;
+            }
         }
 
         return Query ;
