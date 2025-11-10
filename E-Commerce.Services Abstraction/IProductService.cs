@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Shared.DTOs.ProductDTOs ;
+using E_Commerce.Shared.Pagination ;
 using E_Commerce.Shared.Params ;
 
 namespace E_Commerce.Services_Abstraction ;
@@ -6,7 +7,7 @@ namespace E_Commerce.Services_Abstraction ;
 public interface IProductService
 {
     // 1. Get All Products 
-    Task < IEnumerable < ProductDto > > GetProductsAsync ( ProductQueryParams queryParams ) ;
+    Task < PaginationResult < ProductDto > > GetProductsAsync ( ProductQueryParams queryParams ) ;
 
     // 2. Get Product By ID
     Task < ProductDto > GetProductByIdAsync ( int id ) ;

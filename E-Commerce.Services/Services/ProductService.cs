@@ -4,6 +4,7 @@ using E_Commerce.Domain.Entities.ProductModule ;
 using E_Commerce.Services_Abstraction ;
 using E_Commerce.Services.Specifications ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
+using E_Commerce.Shared.Pagination ;
 using E_Commerce.Shared.Params ;
 
 namespace E_Commerce.Services.Services ;
@@ -19,12 +20,18 @@ public class ProductService : IProductService
         _mapper = mapper ;
     }
 
-    public async Task < IEnumerable < ProductDto > > GetProductsAsync ( ProductQueryParams queryParams )
+    public async Task < PaginationResult < ProductDto > > GetProductsAsync ( ProductQueryParams queryParams )
     {
-        var Specification =
-            new ProductWithTypeAndBrandSpecification ( queryParams ) ;
+        var Specification = new ProductWithTypeAndBrandSpecification ( queryParams ) ;
         var Products = await _unitOfWork.GetRepository < Product , int > ( ).GetAllAsync ( Specification ) ;
-        return _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
+        var CountDataToReturn = Products.Count ( ) ;
+        var DataToReturn = _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
+        return new PaginationResult < ProductDto > (
+            queryParams.PageIndex ,
+            CountDataToReturn ,
+            0 ,
+            DataToReturn
+        ) ;
     }
 
     public async Task < ProductDto > GetProductByIdAsync ( int id )

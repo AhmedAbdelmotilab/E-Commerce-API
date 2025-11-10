@@ -1,5 +1,6 @@
 ﻿using E_Commerce.Services_Abstraction ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
+using E_Commerce.Shared.Pagination ;
 using E_Commerce.Shared.Params ;
 using Microsoft.AspNetCore.Mvc ;
 
@@ -20,7 +21,8 @@ public class ProductsController : ControllerBase
 
     [ HttpGet ]
     // GET : => BaseUrl/api/Products
-    public async Task < ActionResult < IEnumerable < ProductDto > > > GetAllProducts ([FromQuery] ProductQueryParams queryParams )
+    public async Task < ActionResult < PaginationResult < ProductDto > > >
+        GetAllProducts ( [ FromQuery ] ProductQueryParams queryParams )
     {
         var Products = await _productService.GetProductsAsync ( queryParams ) ;
         return Ok ( Products ) ;
