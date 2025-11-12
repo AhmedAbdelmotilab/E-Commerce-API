@@ -7,6 +7,7 @@ using E_Commerce.Services.MappingProfile ;
 using E_Commerce.Services.Services ;
 using E_Commerce.Web.Extensions ;
 using Microsoft.EntityFrameworkCore ;
+using StackExchange.Redis ;
 
 namespace E_Commerce.Web ;
 
@@ -27,6 +28,10 @@ public class Program
         } ) ;
         builder.Services.AddScoped < IDataInitializer , DataInitializer > ( ) ;
         builder.Services.AddScoped < IUnitOfWork , UnitOfWork > ( ) ;
+        builder.Services.AddSingleton < IConnectionMultiplexer > ( Sp =>
+        {
+            return ConnectionMultiplexer.Connect ( builder.Configuration.GetConnectionString ( "RedisConnection" )! ) ;
+        } ) ;
 
         #region With AutoMapper 15.0.0
 
