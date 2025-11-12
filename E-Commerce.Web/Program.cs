@@ -32,7 +32,8 @@ public class Program
         {
             return ConnectionMultiplexer.Connect ( builder.Configuration.GetConnectionString ( "RedisConnection" )! ) ;
         } ) ;
-        builder.Services.AddTransient < IBasketRepository , BasketRepository > ( ) ;
+        builder.Services.AddScoped < IBasketRepository , BasketRepository > ( ) ;
+        builder.Services.AddScoped < IBasketService , BasketService > ( ) ;
 
         #region With AutoMapper 15.0.0
 
