@@ -20,7 +20,11 @@ public class CacheService : ICacheService
 
     public Task SetAsync ( string CacheKey , object CacheValue , TimeSpan TimeToLive )
     {
-        var Value = JsonSerializer.Serialize ( CacheValue ) ;
+        var Value = JsonSerializer.Serialize ( CacheValue ,
+            new JsonSerializerOptions ( )
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            } ) ;
         return _cacheRepository.SetAsync ( CacheKey , Value , TimeToLive ) ;
     }
 }
