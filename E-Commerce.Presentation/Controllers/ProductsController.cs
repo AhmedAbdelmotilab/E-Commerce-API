@@ -21,7 +21,7 @@ public class ProductsController : ControllerBase
     #region GET ALL PRODUCTS
 
     [ HttpGet ]
-    [ RedisCache ]
+    [ RedisCache ( 10 ) ]
     // GET : => BaseUrl/api/Products
     public async Task < ActionResult < PaginationResult < ProductDto > > >
         GetAllProducts ( [ FromQuery ] ProductQueryParams queryParams )

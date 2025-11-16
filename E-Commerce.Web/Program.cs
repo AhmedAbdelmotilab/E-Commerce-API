@@ -35,6 +35,7 @@ public class Program
         builder.Services.AddScoped < IBasketRepository , BasketRepository > ( ) ;
         builder.Services.AddScoped < IBasketService , BasketService > ( ) ;
         builder.Services.AddScoped < ICacheRepository , CacheRepository > ( ) ;
+        builder.Services.AddScoped < ICacheService , CacheService > ( ) ;
 
         #region With AutoMapper 15.0.0
 
