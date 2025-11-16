@@ -1,4 +1,5 @@
-﻿using E_Commerce.Services_Abstraction ;
+﻿using E_Commerce.Presentation.Attributes ;
+using E_Commerce.Services_Abstraction ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
 using E_Commerce.Shared.Pagination ;
 using E_Commerce.Shared.Params ;
@@ -20,6 +21,7 @@ public class ProductsController : ControllerBase
     #region GET ALL PRODUCTS
 
     [ HttpGet ]
+    [ RedisCache ]
     // GET : => BaseUrl/api/Products
     public async Task < ActionResult < PaginationResult < ProductDto > > >
         GetAllProducts ( [ FromQuery ] ProductQueryParams queryParams )
