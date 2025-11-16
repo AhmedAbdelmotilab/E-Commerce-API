@@ -6,6 +6,7 @@ using E_Commerce.Services_Abstraction ;
 using E_Commerce.Services.MappingProfile ;
 using E_Commerce.Services.Services ;
 using E_Commerce.Web.Extensions ;
+using E_Commerce.Web.Middlewares ;
 using Microsoft.EntityFrameworkCore ;
 using StackExchange.Redis ;
 
@@ -64,6 +65,9 @@ public class Program
         #endregion
 
         #region Configure the HTTP request pipeline. Middleware.
+
+        /* Handler Exceptions Middleware */
+        app.UseMiddleware < ExceptionHandlerMiddleware > ( ) ;
 
         /* Swagger in Development */
         if ( app.Environment.IsDevelopment ( ) )
