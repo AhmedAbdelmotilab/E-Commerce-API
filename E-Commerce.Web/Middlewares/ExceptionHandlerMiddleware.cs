@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc ;
+﻿using E_Commerce.Services.Exceptions ;
+using Microsoft.AspNetCore.Mvc ;
 
 namespace E_Commerce.Web.Middlewares ;
 
@@ -23,14 +24,18 @@ public class ExceptionHandlerMiddleware
         catch ( Exception ex )
         {
             _logger.LogError ( ex , $"Something went wrong : {ex.Message}" ) ;
-            httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError ;
             var Problem = new ProblemDetails ( )
             {
                 Title = "An Unexpected Error has Occurred" ,
-                Status = StatusCodes.Status500InternalServerError ,
+                Status = ex switch
+                {
+                    NotFoundException => StatusCodes.Status404NotFound ,
+                    _ => StatusCodes.Status500InternalServerError
+                } ,
                 Detail = ex.Message ,
                 Instance = httpContext.Request.Path ,
             } ;
+            httpContext.Response.StatusCode = Problem.Status.Value ;
             await httpContext.Response.WriteAsJsonAsync ( Problem ) ;
         }
     }

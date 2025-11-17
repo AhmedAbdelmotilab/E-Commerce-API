@@ -2,6 +2,7 @@
 using E_Commerce.Domain.Contracts ;
 using E_Commerce.Domain.Entities.ProductModule ;
 using E_Commerce.Services_Abstraction ;
+using E_Commerce.Services.Exceptions ;
 using E_Commerce.Services.Specifications ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
 using E_Commerce.Shared.Pagination ;
@@ -41,6 +42,11 @@ public class ProductService : IProductService
     {
         var Specification = new ProductWithTypeAndBrandSpecification ( id ) ;
         var Product = await _unitOfWork.GetRepository < Product , int > ( ).GetByIdAsync ( Specification ) ;
+        if ( Product is null )
+        {
+            throw new ProductNotFound ( id ) ;
+        }
+
         return _mapper.Map < ProductDto > ( Product ) ;
     }
 
