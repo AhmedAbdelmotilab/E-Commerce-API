@@ -18,6 +18,7 @@ public class ExceptionHandlerMiddleware
         try
         {
             await _next.Invoke ( httpContext ) ;
+            await HandelNotFoundEndPoint ( httpContext ) ;
         }
         catch ( Exception ex )
         {
@@ -28,6 +29,21 @@ public class ExceptionHandlerMiddleware
                 Title = "An Unexpected Error has Occurred" ,
                 Status = StatusCodes.Status500InternalServerError ,
                 Detail = ex.Message ,
+                Instance = httpContext.Request.Path ,
+            } ;
+            await httpContext.Response.WriteAsJsonAsync ( Problem ) ;
+        }
+    }
+
+    private static async Task HandelNotFoundEndPoint ( HttpContext httpContext )
+    {
+        if ( httpContext.Response.StatusCode == StatusCodes.Status404NotFound )
+        {
+            var Problem = new ProblemDetails ( )
+            {
+                Title = "Error While Processing Request - EndPoint Not Found" ,
+                Status = StatusCodes.Status404NotFound ,
+                Detail = $"EnPoint {httpContext.Request.Path} Not Found" ,
                 Instance = httpContext.Request.Path ,
             } ;
             await httpContext.Response.WriteAsJsonAsync ( Problem ) ;
