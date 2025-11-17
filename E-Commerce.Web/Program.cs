@@ -6,7 +6,9 @@ using E_Commerce.Services_Abstraction ;
 using E_Commerce.Services.MappingProfile ;
 using E_Commerce.Services.Services ;
 using E_Commerce.Web.Extensions ;
+using E_Commerce.Web.Factories ;
 using E_Commerce.Web.Middlewares ;
+using Microsoft.AspNetCore.Mvc ;
 using Microsoft.EntityFrameworkCore ;
 using StackExchange.Redis ;
 
@@ -37,6 +39,16 @@ public class Program
         builder.Services.AddScoped < IBasketService , BasketService > ( ) ;
         builder.Services.AddScoped < ICacheRepository , CacheRepository > ( ) ;
         builder.Services.AddScoped < ICacheService , CacheService > ( ) ;
+
+        #region Configure The API Controller Service
+
+        builder.Services.Configure < ApiBehaviorOptions > ( options =>
+            {
+                options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationResponse ;
+            }
+        ) ;
+
+        #endregion
 
         #region With AutoMapper 15.0.0
 
