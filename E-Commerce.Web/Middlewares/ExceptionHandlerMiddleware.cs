@@ -42,7 +42,7 @@ public class ExceptionHandlerMiddleware
 
     private static async Task HandelNotFoundEndPoint ( HttpContext httpContext )
     {
-        if ( httpContext.Response.StatusCode == StatusCodes.Status404NotFound )
+        if ( httpContext.Response.StatusCode == StatusCodes.Status404NotFound && ! httpContext.Response.HasStarted )
         {
             var Problem = new ProblemDetails ( )
             {
