@@ -2,7 +2,10 @@
 using E_Commerce.Domain.Contracts ;
 using E_Commerce.Domain.Entities.ProductModule ;
 using E_Commerce.Services_Abstraction ;
+using E_Commerce.Services.Specifications ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
+using E_Commerce.Shared.Pagination ;
+using E_Commerce.Shared.Params ;
 
 namespace E_Commerce.Services.Services ;
 
@@ -17,15 +20,27 @@ public class ProductService : IProductService
         _mapper = mapper ;
     }
 
-    public async Task < IEnumerable < ProductDto > > GetProductsAsync ( )
+    public async Task < PaginationResult < ProductDto > > GetProductsAsync ( ProductQueryParams queryParams )
     {
-        var Products = await _unitOfWork.GetRepository < Product , int > ( ).GetAllAsync ( ) ;
-        return _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
+        var Repo = _unitOfWork.GetRepository < Product , int > ( ) ;
+        var Specification = new ProductWithTypeAndBrandSpecification ( queryParams ) ;
+        var Products = await Repo.GetAllAsync ( Specification ) ;
+        var CountDataToReturn = Products.Count ( ) ;
+        var DataToReturn = _mapper.Map < IEnumerable < ProductDto > > ( Products ) ;
+        var SpecificationForCount = new ProductCountSpecification ( queryParams ) ;
+        var CountOfAllProducts = await Repo.CountAsync ( SpecificationForCount ) ;
+        return new PaginationResult < ProductDto > (
+            queryParams.PageIndex ,
+            CountDataToReturn ,
+            CountOfAllProducts ,
+            DataToReturn
+        ) ;
     }
 
     public async Task < ProductDto > GetProductByIdAsync ( int id )
     {
-        var Product = await _unitOfWork.GetRepository < Product , int > ( ).GetByIdAsync ( id ) ;
+        var Specification = new ProductWithTypeAndBrandSpecification ( id ) ;
+        var Product = await _unitOfWork.GetRepository < Product , int > ( ).GetByIdAsync ( Specification ) ;
         return _mapper.Map < ProductDto > ( Product ) ;
     }
 
