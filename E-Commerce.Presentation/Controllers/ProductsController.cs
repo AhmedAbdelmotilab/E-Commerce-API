@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc ;
 
 namespace E_Commerce.Presentation.Controllers ;
 
-[ ApiController ]
-[ Route ( "api/[controller]" ) ]
-public class ProductsController : ControllerBase
+public class ProductsController : ApiBaseController
 {
     private readonly IProductService _productService ;
 
@@ -39,7 +37,7 @@ public class ProductsController : ControllerBase
     public async Task < ActionResult < ProductDto > > GetProductById ( int id )
     {
         var Product = await _productService.GetProductByIdAsync ( id ) ;
-        return Ok ( Product ) ;
+        return HandelResult < ProductDto > ( Product ) ;
     }
 
     #endregion
