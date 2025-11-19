@@ -30,7 +30,8 @@ public class Program
         {
             options.UseSqlServer ( builder.Configuration.GetConnectionString ( "DefaultConnection" ) ) ;
         } ) ;
-        builder.Services.AddScoped < IDataInitializer , DataInitializer > ( ) ;
+        builder.Services.AddKeyedScoped < IDataInitializer , DataInitializer > ( "Default" ) ;
+        builder.Services.AddKeyedScoped < IDataInitializer , IdentityDataInitializer > ( "Identity" ) ;
         builder.Services.AddScoped < IUnitOfWork , UnitOfWork > ( ) ;
         builder.Services.AddSingleton < IConnectionMultiplexer > ( Sp =>
         {
