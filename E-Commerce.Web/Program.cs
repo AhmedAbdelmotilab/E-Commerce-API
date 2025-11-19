@@ -44,6 +44,9 @@ public class Program
         {
             options.UseSqlServer ( builder.Configuration.GetConnectionString ( "IdentityConnection" ) ) ;
         } ) ;
+        builder.Services.AddIdentityCore < ApplicationUser > ( )
+            .AddRoles < IdentityRole > ( )
+            .AddEntityFrameworkStores < StoreIdentityDbContext > ( ) ;
 
         #region Configure The API Controller Service
 
