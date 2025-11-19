@@ -1,6 +1,8 @@
 using E_Commerce.Domain.Contracts ;
+using E_Commerce.Domain.Entities.IdentityModule ;
 using E_Commerce.Persistence.Data.DataSeed ;
 using E_Commerce.Persistence.Data.DbContexts ;
+using E_Commerce.Persistence.IdentityData.Data.DataSeed ;
 using E_Commerce.Persistence.IdentityData.Data.DbContexts ;
 using E_Commerce.Persistence.Repositories ;
 using E_Commerce.Services_Abstraction ;
@@ -9,6 +11,7 @@ using E_Commerce.Services.Services ;
 using E_Commerce.Web.Extensions ;
 using E_Commerce.Web.Factories ;
 using E_Commerce.Web.Middlewares ;
+using Microsoft.AspNetCore.Identity ;
 using Microsoft.AspNetCore.Mvc ;
 using Microsoft.EntityFrameworkCore ;
 using StackExchange.Redis ;
@@ -83,6 +86,7 @@ public class Program
         await app.MigrationDatabaseAsync ( ) ;
         await app.MigrationIdentityDatabaseAsync ( ) ;
         await app.SeedDatabaseAsync ( ) ;
+        await app.SeedIdentityDatabaseAsync ( ) ;
 
         #endregion
 
