@@ -77,6 +77,7 @@ public class Program
         #region Data Seeding
 
         await app.MigrationDatabaseAsync ( ) ;
+        await app.MigrationIdentityDatabaseAsync ( ) ;
         await app.SeedDatabaseAsync ( ) ;
 
         #endregion
