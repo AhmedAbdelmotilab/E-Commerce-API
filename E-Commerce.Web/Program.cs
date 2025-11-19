@@ -1,6 +1,7 @@
 using E_Commerce.Domain.Contracts ;
 using E_Commerce.Persistence.Data.DataSeed ;
 using E_Commerce.Persistence.Data.DbContexts ;
+using E_Commerce.Persistence.IdentityData.Data.DbContexts ;
 using E_Commerce.Persistence.Repositories ;
 using E_Commerce.Services_Abstraction ;
 using E_Commerce.Services.MappingProfile ;
@@ -39,6 +40,10 @@ public class Program
         builder.Services.AddScoped < IBasketService , BasketService > ( ) ;
         builder.Services.AddScoped < ICacheRepository , CacheRepository > ( ) ;
         builder.Services.AddScoped < ICacheService , CacheService > ( ) ;
+        builder.Services.AddDbContext < StoreIdentityDbContext > ( options =>
+        {
+            options.UseSqlServer ( builder.Configuration.GetConnectionString ( "IdentityConnection" ) ) ;
+        } ) ;
 
         #region Configure The API Controller Service
 
