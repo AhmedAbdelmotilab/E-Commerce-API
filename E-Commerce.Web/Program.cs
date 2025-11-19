@@ -51,6 +51,7 @@ public class Program
         builder.Services.AddIdentityCore < ApplicationUser > ( )
             .AddRoles < IdentityRole > ( )
             .AddEntityFrameworkStores < StoreIdentityDbContext > ( ) ;
+        builder.Services.AddScoped < IAuthenticationService , AuthenticationService > ( ) ;
 
         #region Configure The API Controller Service
 
