@@ -36,7 +36,8 @@ public class AuthenticationService : IAuthenticationService
             return Error.InvalidCredentials ( "User Invalid Credentials" ) ;
         }
 
-        return new UserDto ( User.Email! , User.DisplayName , "Token" ) ;
+        var Token = await CreateTokenAsync ( User ) ;
+        return new UserDto ( User.Email! , User.DisplayName , Token ) ;
     }
 
     public async Task < Result < UserDto > > RegisterAsync ( RegisterDto registerDto )
@@ -51,7 +52,8 @@ public class AuthenticationService : IAuthenticationService
         var IdentityResult = await _userManager.CreateAsync ( User , registerDto.Password ) ;
         if ( IdentityResult.Succeeded )
         {
-            return new UserDto ( User.Email , User.DisplayName , "Token" ) ;
+            var Token = await CreateTokenAsync ( User ) ;
+            return new UserDto ( User.Email , User.DisplayName , Token ) ;
         }
         else
         {
