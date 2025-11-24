@@ -61,6 +61,20 @@ public class AuthenticationService : IAuthenticationService
         }
     }
 
+    public async Task < bool > CheckEmailAsync ( string email )
+    {
+        var User = await _userManager.FindByEmailAsync ( email ) ;
+
+        return User != null ;
+    }
+
+    public async Task < Result < UserDto > > GetUserAsync ( string email )
+    {
+        var User = await _userManager.FindByEmailAsync ( email ) ;
+        if ( User is null ) return Error.NotFound ( "User Not Found" , $"No user with {email} was found." ) ;
+        return new UserDto ( User.Email! , User.DisplayName , await CreateTokenAsync ( User ) ) ;
+    }
+
     #region Method For Generate Token
 
     private async Task < string > CreateTokenAsync ( ApplicationUser user )
