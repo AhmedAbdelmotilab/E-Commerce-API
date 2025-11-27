@@ -1,5 +1,6 @@
 ﻿using System.Text.Json ;
 using E_Commerce.Domain.Contracts ;
+using E_Commerce.Domain.Entities.OrderModule ;
 using E_Commerce.Domain.Entities.ProductModule ;
 using E_Commerce.Domain.Entities.SharedModule ;
 using E_Commerce.Persistence.Data.DbContexts ;
@@ -20,12 +21,13 @@ public class DataInitializer : IDataInitializer
     {
         try
         {
-            #region Check On That We Have Products and Brand and Types If Yes Go Out
+            #region Check On That We Have Products and Brand and Types and DeliveryMethods If Yes Go Out
 
             var HasProducts = await _dbContext.Products.AnyAsync ( ) ;
             var HasProductBrands = await _dbContext.ProductBrands.AnyAsync ( ) ;
             var HasProductTypes = await _dbContext.ProductTypes.AnyAsync ( ) ;
-            if ( HasProducts && HasProductBrands && HasProductTypes ) return ;
+            var HasDeliveryMethods = await _dbContext.Set < DeliveryMethod > ( ).AnyAsync ( ) ;
+            if ( HasProducts && HasProductBrands && HasProductTypes && HasDeliveryMethods ) return ;
 
             #endregion
 
@@ -53,10 +55,20 @@ public class DataInitializer : IDataInitializer
             if ( ! HasProducts )
             {
                 await SeedDataFromJsonAsync < Product , int > ( "products.json" , _dbContext.Products ) ;
-                await _dbContext.SaveChangesAsync ( ) ;
             }
 
             #endregion
+
+            #region Check On The DeliveryMethods If We Do Not Have DeliveryMethods Then Seed Data To The Table
+
+            if ( ! HasDeliveryMethods )
+            {
+                await SeedDataFromJsonAsync < DeliveryMethod , int > ( "delivery.json" , _dbContext.Set < DeliveryMethod > ( ) ) ;
+            }
+
+            #endregion
+
+            await _dbContext.SaveChangesAsync ( ) ;
         }
         catch ( Exception e )
         {
