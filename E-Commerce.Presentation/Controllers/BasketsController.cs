@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Mvc ;
 
 namespace E_Commerce.Presentation.Controllers ;
 
-[ ApiController ]
-[ Route ( "api/[controller]" ) ]
-public class BasketsController : ControllerBase
+public class BasketsController : ApiBaseController
 {
     private readonly IBasketService _basketService ;
 
@@ -18,10 +16,10 @@ public class BasketsController : ControllerBase
     #region Get Basket : BaseUrl/api/Baskets?id = " "
 
     [ HttpGet ]
-    public async Task < ActionResult < BasketDto ? > > GetBasket ( string id )
+    public async Task < ActionResult < BasketDto > > GetBasket ( string id )
     {
         var Basket = await _basketService.GetBasketAsync ( id ) ;
-        return Ok ( Basket ) ;
+        return HandelResult < BasketDto > ( Basket ) ;
     }
 
     #endregion

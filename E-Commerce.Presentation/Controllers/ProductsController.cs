@@ -1,4 +1,5 @@
-﻿using E_Commerce.Services_Abstraction ;
+﻿using E_Commerce.Presentation.Attributes ;
+using E_Commerce.Services_Abstraction ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
 using E_Commerce.Shared.Pagination ;
 using E_Commerce.Shared.Params ;
@@ -6,9 +7,7 @@ using Microsoft.AspNetCore.Mvc ;
 
 namespace E_Commerce.Presentation.Controllers ;
 
-[ ApiController ]
-[ Route ( "api/[controller]" ) ]
-public class ProductsController : ControllerBase
+public class ProductsController : ApiBaseController
 {
     private readonly IProductService _productService ;
 
@@ -20,6 +19,7 @@ public class ProductsController : ControllerBase
     #region GET ALL PRODUCTS
 
     [ HttpGet ]
+    [ RedisCache ( 10 ) ]
     // GET : => BaseUrl/api/Products
     public async Task < ActionResult < PaginationResult < ProductDto > > >
         GetAllProducts ( [ FromQuery ] ProductQueryParams queryParams )
@@ -37,7 +37,7 @@ public class ProductsController : ControllerBase
     public async Task < ActionResult < ProductDto > > GetProductById ( int id )
     {
         var Product = await _productService.GetProductByIdAsync ( id ) ;
-        return Ok ( Product ) ;
+        return HandelResult < ProductDto > ( Product ) ;
     }
 
     #endregion

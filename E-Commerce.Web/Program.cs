@@ -1,11 +1,18 @@
 using E_Commerce.Domain.Contracts ;
+using E_Commerce.Domain.Entities.IdentityModule ;
 using E_Commerce.Persistence.Data.DataSeed ;
 using E_Commerce.Persistence.Data.DbContexts ;
+using E_Commerce.Persistence.IdentityData.Data.DataSeed ;
+using E_Commerce.Persistence.IdentityData.Data.DbContexts ;
 using E_Commerce.Persistence.Repositories ;
 using E_Commerce.Services_Abstraction ;
 using E_Commerce.Services.MappingProfile ;
 using E_Commerce.Services.Services ;
 using E_Commerce.Web.Extensions ;
+using E_Commerce.Web.Factories ;
+using E_Commerce.Web.Middlewares ;
+using Microsoft.AspNetCore.Identity ;
+using Microsoft.AspNetCore.Mvc ;
 using Microsoft.EntityFrameworkCore ;
 using StackExchange.Redis ;
 
@@ -26,7 +33,8 @@ public class Program
         {
             options.UseSqlServer ( builder.Configuration.GetConnectionString ( "DefaultConnection" ) ) ;
         } ) ;
-        builder.Services.AddScoped < IDataInitializer , DataInitializer > ( ) ;
+        builder.Services.AddKeyedScoped < IDataInitializer , DataInitializer > ( "Default" ) ;
+        builder.Services.AddKeyedScoped < IDataInitializer , IdentityDataInitializer > ( "Identity" ) ;
         builder.Services.AddScoped < IUnitOfWork , UnitOfWork > ( ) ;
         builder.Services.AddSingleton < IConnectionMultiplexer > ( Sp =>
         {
@@ -34,6 +42,26 @@ public class Program
         } ) ;
         builder.Services.AddScoped < IBasketRepository , BasketRepository > ( ) ;
         builder.Services.AddScoped < IBasketService , BasketService > ( ) ;
+        builder.Services.AddScoped < ICacheRepository , CacheRepository > ( ) ;
+        builder.Services.AddScoped < ICacheService , CacheService > ( ) ;
+        builder.Services.AddDbContext < StoreIdentityDbContext > ( options =>
+        {
+            options.UseSqlServer ( builder.Configuration.GetConnectionString ( "IdentityConnection" ) ) ;
+        } ) ;
+        builder.Services.AddIdentityCore < ApplicationUser > ( )
+            .AddRoles < IdentityRole > ( )
+            .AddEntityFrameworkStores < StoreIdentityDbContext > ( ) ;
+        builder.Services.AddScoped < IAuthenticationService , AuthenticationService > ( ) ;
+
+        #region Configure The API Controller Service
+
+        builder.Services.Configure < ApiBehaviorOptions > ( options =>
+            {
+                options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationResponse ;
+            }
+        ) ;
+
+        #endregion
 
         #region With AutoMapper 15.0.0
 
@@ -57,11 +85,16 @@ public class Program
         #region Data Seeding
 
         await app.MigrationDatabaseAsync ( ) ;
+        await app.MigrationIdentityDatabaseAsync ( ) ;
         await app.SeedDatabaseAsync ( ) ;
+        await app.SeedIdentityDatabaseAsync ( ) ;
 
         #endregion
 
         #region Configure the HTTP request pipeline. Middleware.
+
+        /* Handler Exceptions Middleware */
+        app.UseMiddleware < ExceptionHandlerMiddleware > ( ) ;
 
         /* Swagger in Development */
         if ( app.Environment.IsDevelopment ( ) )

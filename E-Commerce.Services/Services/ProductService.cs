@@ -3,6 +3,7 @@ using E_Commerce.Domain.Contracts ;
 using E_Commerce.Domain.Entities.ProductModule ;
 using E_Commerce.Services_Abstraction ;
 using E_Commerce.Services.Specifications ;
+using E_Commerce.Shared.CommonResult ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
 using E_Commerce.Shared.Pagination ;
 using E_Commerce.Shared.Params ;
@@ -37,10 +38,15 @@ public class ProductService : IProductService
         ) ;
     }
 
-    public async Task < ProductDto > GetProductByIdAsync ( int id )
+    public async Task < Result < ProductDto > > GetProductByIdAsync ( int id )
     {
         var Specification = new ProductWithTypeAndBrandSpecification ( id ) ;
         var Product = await _unitOfWork.GetRepository < Product , int > ( ).GetByIdAsync ( Specification ) ;
+        if ( Product is null )
+        {
+            return Error.NotFound ( "Product not found" , $"Product With {id} Is Not Found" ) ;
+        }
+
         return _mapper.Map < ProductDto > ( Product ) ;
     }
 
