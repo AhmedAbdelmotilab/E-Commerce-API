@@ -95,6 +95,7 @@ public class Program
         #region With AutoMapper 14.0.0
 
         builder.Services.AddAutoMapper ( typeof ( ProductProfile ).Assembly ) ;
+        builder.Services.AddAutoMapper ( typeof ( OrderProfile ).Assembly ) ;
 
         #endregion
 
