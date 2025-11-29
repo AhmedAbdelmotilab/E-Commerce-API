@@ -100,6 +100,7 @@ public class Program
         #endregion
 
         builder.Services.AddScoped < IProductService , ProductService > ( ) ;
+        builder.Services.AddScoped < IOrderService , OrderService > ( ) ;
 
         #endregion
 
