@@ -4,6 +4,7 @@ using E_Commerce.Domain.Entities.BasketModule ;
 using E_Commerce.Domain.Entities.OrderModule ;
 using E_Commerce.Domain.Entities.ProductModule ;
 using E_Commerce.Services_Abstraction ;
+using E_Commerce.Services.Specifications ;
 using E_Commerce.Shared.CommonResult ;
 using E_Commerce.Shared.DTOs.OrderDTOs ;
 
@@ -51,6 +52,32 @@ public class OrderService : IOrderService
         int Result = await _unitOfWork.SavChangesAsync ( ) ;
         if ( Result == 0 ) return Error.Failure ( "Order Failure" , "Create Order Failed" ) ;
         return _mapper.Map < OrderToReturnDto > ( Order ) ;
+    }
+
+    public async Task < Result < IEnumerable < OrderToReturnDto > > > GetAllOrdersAsync ( string Email )
+    {
+        var Specification = new OrderSpecification ( Email ) ;
+        var Orders = await _unitOfWork.GetRepository < Order , Guid > ( ).GetAllAsync ( Specification ) ;
+        if ( ! Orders.Any ( ) ) return Error.NotFound ( "Orders not found" , $"The Orders For${Email} Not Found" ) ;
+        var Data = _mapper.Map < IEnumerable < OrderToReturnDto > > ( Orders ) ;
+        return Result < IEnumerable < OrderToReturnDto > >.Ok ( Data ) ;
+    }
+
+    public async Task < Result < IEnumerable < DeliveryMethodDto > > > GetDeliveryMethodsAsync ( string Email )
+    {
+        var DeliveryMethods = await _unitOfWork.GetRepository < DeliveryMethod , int > ( ).GetAllAsync ( ) ;
+        if ( ! DeliveryMethods.Any ( ) ) return Error.NotFound ( "DeliveryMethods not found" , $"The DM With Not Found" ) ;
+        var Data = _mapper.Map < IEnumerable < DeliveryMethodDto > > ( DeliveryMethods ) ;
+        return Result < IEnumerable < DeliveryMethodDto > >.Ok ( Data ) ;
+    }
+
+    public async Task < Result < OrderToReturnDto > > GetOrderByIdAsync ( Guid id , string Email )
+    {
+        var Specification = new OrderSpecification ( id , Email ) ;
+        var Order = await _unitOfWork.GetRepository < Order , Guid > ( ).GetByIdAsync ( Specification ) ;
+        if ( Order is null ) return Error.NotFound ( "Order not found" , $"The Order With ${id} Not Found" ) ;
+        var Data = _mapper.Map < OrderToReturnDto > ( Order ) ;
+        return Result < OrderToReturnDto >.Ok ( Data ) ;
     }
 
     private static OrderItem CreateOrderItem ( Product product , BasketItem Item )

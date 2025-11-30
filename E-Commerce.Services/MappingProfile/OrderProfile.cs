@@ -14,5 +14,6 @@ public class OrderProfile : Profile
         CreateMap < OrderItem , OrderItemDto > ( )
             .ForMember ( D => D.ProductName , O => O.MapFrom ( src => src.Product.ProductName ) )
             .ForMember ( D => D.PictureUrl , O => O.MapFrom < OrderItemPictureUrlResolver > ( ) ) ;
+        CreateMap < DeliveryMethod , DeliveryMethodDto > ( ) ;
     }
 }
