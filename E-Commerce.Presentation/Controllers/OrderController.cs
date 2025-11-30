@@ -21,4 +21,28 @@ public class OrderController : ApiBaseController
         var Result = await _orderService.CreateOrderAsync ( orderDto , GetEmailFromToken ( ) ) ;
         return HandelResult ( Result ) ;
     }
+
+    [ Authorize ]
+    [ HttpGet ] // BaseUrl/api/Order
+    public async Task < ActionResult < IEnumerable < OrderToReturnDto > > > GetOrders ( )
+    {
+        var Orders = await _orderService.GetAllOrdersAsync ( GetEmailFromToken ( ) ) ;
+        return HandelResult ( Orders ) ;
+    }
+
+    [ Authorize ]
+    [ HttpGet ( "{id:guid}" ) ] // BaseUrl/api/Order?id
+    public async Task < ActionResult < OrderToReturnDto > > GetOrderById ( Guid id )
+    {
+        var Order = await _orderService.GetOrderByIdAsync ( id , GetEmailFromToken ( ) ) ;
+        return HandelResult ( Order ) ;
+    }
+
+    [ Authorize ]
+    [ HttpGet ( "DeliveryMethods" ) ] // BaseUrl/api/Order/DeliveryMethods
+    public async Task < ActionResult < IEnumerable < DeliveryMethodDto > > > GetDeliveryMethods ( )
+    {
+        var DeliveryMethods = await _orderService.GetDeliveryMethodsAsync ( GetEmailFromToken ( ) ) ;
+        return HandelResult ( DeliveryMethods ) ;
+    }
 }
