@@ -28,6 +28,13 @@ public class OrderService : IOrderService
         var OrderAddress = _mapper.Map < OrderAddress > ( orderDto.Address ) ;
         var Basket = await _basketRepository.GetBasketAsync ( orderDto.BasketId ) ;
         if ( Basket is null ) return Error.NotFound ( "Basket not found" , $"The Basket With {orderDto.BasketId} Not Found" ) ;
+        var ExistingOrderSpecs = new OrderWithPaymentIntentSpecification ( Basket.PaymentIntentId ) ;
+        var ExistingOrder = await _unitOfWork.GetRepository < Order , Guid > ( ).GetByIdAsync ( ExistingOrderSpecs ) ;
+        if ( ExistingOrder is not null )
+        {
+            _unitOfWork.GetRepository < Order , Guid > ( ).Remove ( ExistingOrder ) ;
+        }
+
         List < OrderItem > OrderItems = new List < OrderItem > ( ) ;
         foreach ( var Item in Basket.Items )
         {
@@ -47,6 +54,7 @@ public class OrderService : IOrderService
             Items = OrderItems ,
             SubTotal = SubTotal ,
             UserEmail = Email ,
+            PaymentIntentId = Basket.PaymentIntentId ,
         } ;
         await _unitOfWork.GetRepository < Order , Guid > ( ).AddAsync ( Order ) ;
         int Result = await _unitOfWork.SavChangesAsync ( ) ;
