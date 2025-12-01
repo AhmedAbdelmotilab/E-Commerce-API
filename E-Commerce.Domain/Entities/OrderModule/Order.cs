@@ -10,6 +10,7 @@ public class Order : BaseEntity < Guid >
     public OrderAddress Address { get ; set ; } = default! ;
     public ICollection < OrderItem > Items { get ; set ; } = [ ] ;
     public decimal SubTotal { get ; set ; } // Total Price Of Items
+    public string PaymentIntentId { get ; set ; } = default! ;
 
     #region Method For Calculate The Total Price [(SubTotal) Total Price Of Items + (DeliveryMethod.Price) DeliveryMethodCost]
 
