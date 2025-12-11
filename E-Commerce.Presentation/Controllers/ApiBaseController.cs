@@ -1,4 +1,5 @@
-﻿using E_Commerce.Shared.CommonResult ;
+﻿using System.Security.Claims ;
+using E_Commerce.Shared.CommonResult ;
 using Microsoft.AspNetCore.Http ;
 using Microsoft.AspNetCore.Mvc ;
 using Microsoft.AspNetCore.Mvc.ModelBinding ;
@@ -91,4 +92,7 @@ public class ApiBaseController : ControllerBase
 
         return ValidationProblem ( ModelStateDictionary ) ;
     }
+
+    // Get User Email From Token
+    protected string GetEmailFromToken ( ) => User.FindFirstValue ( ClaimTypes.Email )! ;
 }

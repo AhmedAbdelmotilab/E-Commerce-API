@@ -1,3 +1,11 @@
 ﻿namespace E_Commerce.Shared.DTOs.BasketDTOs ;
 
-public record BasketDto ( string Id , ICollection < BasketItemDto > Items ) ;
+public record BasketDto
+{
+    public string Id { get ; init ; } = default! ;
+    public ICollection < BasketItemDto > Items { get ; init ; } = [ ] ;
+    public string ? PaymentIntentId { get ; init ; }
+    public string ? ClientSecret { get ; init ; }
+    public int ? DeliveryMethodId { get ; init ; }
+    public decimal ShippingPrice { get ; init ; }
+}
