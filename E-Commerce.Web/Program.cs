@@ -1,3 +1,4 @@
+using System.Text ;
 using E_Commerce.Domain.Contracts ;
 using E_Commerce.Domain.Entities.IdentityModule ;
 using E_Commerce.Persistence.Data.DataSeed ;
@@ -11,9 +12,11 @@ using E_Commerce.Services.Services ;
 using E_Commerce.Web.Extensions ;
 using E_Commerce.Web.Factories ;
 using E_Commerce.Web.Middlewares ;
+using Microsoft.AspNetCore.Authentication.JwtBearer ;
 using Microsoft.AspNetCore.Identity ;
 using Microsoft.AspNetCore.Mvc ;
 using Microsoft.EntityFrameworkCore ;
+using Microsoft.IdentityModel.Tokens ;
 using StackExchange.Redis ;
 
 namespace E_Commerce.Web ;
@@ -52,6 +55,25 @@ public class Program
             .AddRoles < IdentityRole > ( )
             .AddEntityFrameworkStores < StoreIdentityDbContext > ( ) ;
         builder.Services.AddScoped < IAuthenticationService , AuthenticationService > ( ) ;
+        builder.Services.AddAuthentication ( options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme ;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme ;
+            } )
+            .AddJwtBearer ( options =>
+            {
+                options.SaveToken = true ;
+                options.TokenValidationParameters = new TokenValidationParameters ( )
+                {
+                    ValidateIssuer = true ,
+                    ValidateAudience = true ,
+                    ValidateLifetime = true ,
+                    ValidIssuer = builder.Configuration [ "JWTOptions:Issuer" ] ,
+                    ValidAudience = builder.Configuration [ "JWTOptions:Audience" ] ,
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey ( Encoding.UTF8.GetBytes ( builder.Configuration [ "JWTOptions:SecretKey" ] ! ) )
+                } ;
+            } ) ;
 
         #region Configure The API Controller Service
 
@@ -73,10 +95,12 @@ public class Program
         #region With AutoMapper 14.0.0
 
         builder.Services.AddAutoMapper ( typeof ( ProductProfile ).Assembly ) ;
+        builder.Services.AddAutoMapper ( typeof ( OrderProfile ).Assembly ) ;
 
         #endregion
 
         builder.Services.AddScoped < IProductService , ProductService > ( ) ;
+        builder.Services.AddScoped < IOrderService , OrderService > ( ) ;
 
         #endregion
 
@@ -105,7 +129,8 @@ public class Program
 
         app.UseStaticFiles ( ) ;
         app.UseHttpsRedirection ( ) ; /* HTTPS Redirection */
-
+        app.UseAuthentication ( ) ;
+        app.UseAuthorization ( ) ;
         app.MapControllers ( ) ; /* Map API Controllers */
 
         #endregion

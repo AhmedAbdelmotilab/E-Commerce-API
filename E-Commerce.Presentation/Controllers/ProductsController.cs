@@ -3,6 +3,7 @@ using E_Commerce.Services_Abstraction ;
 using E_Commerce.Shared.DTOs.ProductDTOs ;
 using E_Commerce.Shared.Pagination ;
 using E_Commerce.Shared.Params ;
+using Microsoft.AspNetCore.Authorization ;
 using Microsoft.AspNetCore.Mvc ;
 
 namespace E_Commerce.Presentation.Controllers ;
@@ -18,6 +19,7 @@ public class ProductsController : ApiBaseController
 
     #region GET ALL PRODUCTS
 
+    [ Authorize (Roles = "Admin")]
     [ HttpGet ]
     [ RedisCache ( 10 ) ]
     // GET : => BaseUrl/api/Products
@@ -31,7 +33,7 @@ public class ProductsController : ApiBaseController
     #endregion
 
     #region GET PRODUCT BY ID
-
+    [ Authorize ]
     [ HttpGet ( "{id}" ) ]
     // GET : => BaseUrl/api/Products/1
     public async Task < ActionResult < ProductDto > > GetProductById ( int id )
